@@ -369,44 +369,82 @@ sub lookup_options {
     return unless $source;
 
     my $label_column = $field->label_column;
-    return
-        unless ( $source->has_column($label_column) ||
-        $source->result_class->can($label_column) );
+    if ($source->has_column($label_column) ||
+        $source->result_class->can($label_column)) {
 
-    my $active_col = $self->active_column || $field->active_column;
-    $active_col = '' unless $source->has_column($active_col);
-    my $sort_col = $field->sort_column;
-    my ($primary_key) = $source->primary_columns;
+        my $active_col = $self->active_column || $field->active_column;
+        $active_col = '' unless $source->has_column($active_col);
+        my $sort_col = $field->sort_column;
+        my ($primary_key) = $source->primary_columns;
 
-    # if no sort_column and label_column is a source method, not a real column, must
-    # use some other column for sort. There's probably some other column that should
-    # be specified, but this will prevent breakage
-    if ( !defined $sort_col ) {
-        $sort_col = $source->has_column($label_column) ? $label_column : $primary_key;
+        # if no sort_column and label_column is a source method, not a real column, must
+        # use some other column for sort. There's probably some other column that should
+        # be specified, but this will prevent breakage
+        if ( !defined $sort_col ) {
+            $sort_col = $source->has_column($label_column) ? $label_column : $primary_key;
+        }
+
+        # If there's an active column, only select active OR items already selected
+        my $criteria = {};
+        if ($active_col) {
+            my @or = ( $active_col => 1 );
+
+            # But also include any existing non-active
+            push @or, ( "$primary_key" => $field->init_value )
+                if $self->item && defined $field->init_value;
+            $criteria->{'-or'} = \@or;
+        }
+
+        # get an array of row objects
+        my @rows =
+            $self->schema->resultset( $source->source_name )
+            ->search( $criteria, { order_by => $sort_col } )->all;
+        my @options;
+        foreach my $row (@rows) {
+            my $label = $row->$label_column;
+            next unless defined $label;    # this means there's an invalid value
+            push @options, $row->id, $active_col && !$row->$active_col ? "[ $label ]" : "$label";
+        }
+        return \@options;
+    } else {
+        my $active_col = $self->active_column || $field->active_column;
+        $active_col = '' unless $source->has_column($active_col);
+        my $sort_col = $field->sort_column;
+        my ($primary_key) = $source->primary_columns;
+
+        # as we're using the stringify operator as the label, not a real column, must
+        # use some other column for sort. There's probably some other column that should
+        # be specified, but this will prevent breakage
+        if ( !defined $sort_col ) {
+            $sort_col = $primary_key;
+        }
+
+        # If there's an active column, only select active OR items already selected
+        my $criteria = {};
+        if ($active_col) {
+            my @or = ( $active_col => 1 );
+
+            # But also include any existing non-active
+            push @or, ( "$primary_key" => $field->init_value )
+                if $self->item && defined $field->init_value;
+            $criteria->{'-or'} = \@or;
+        }
+
+        # get an array of row objects
+        my @rows =
+            $self->schema->resultset( $source->source_name )
+            ->search( $criteria, { order_by => $sort_col } )->all;
+        my @options;
+        foreach my $row (@rows) {
+            return unless overload::Method($row, '""');
+
+            my $label = $row;
+            next unless defined $label;    # this means there's an invalid value
+            push @options, $row->id, $active_col && !$row->$active_col ? "[ $label ]" : "$label";
+        }
+        return \@options;
     }
 
-    # If there's an active column, only select active OR items already selected
-    my $criteria = {};
-    if ($active_col) {
-        my @or = ( $active_col => 1 );
-
-        # But also include any existing non-active
-        push @or, ( "$primary_key" => $field->init_value )
-            if $self->item && defined $field->init_value;
-        $criteria->{'-or'} = \@or;
-    }
-
-    # get an array of row objects
-    my @rows =
-        $self->schema->resultset( $source->source_name )
-        ->search( $criteria, { order_by => $sort_col } )->all;
-    my @options;
-    foreach my $row (@rows) {
-        my $label = $row->$label_column;
-        next unless defined $label;    # this means there's an invalid value
-        push @options, $row->id, $active_col && !$row->$active_col ? "[ $label ]" : "$label";
-    }
-    return \@options;
 }
 
 sub init_value {
