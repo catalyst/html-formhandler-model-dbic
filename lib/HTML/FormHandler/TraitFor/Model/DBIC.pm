@@ -365,7 +365,7 @@ sub lookup_options {
         # check for many_to_many multiple select
         my $resultset = $self_source->resultset;
         my $new_result = $resultset->new_result( {} );
-        if ( $new_result && $new_result->can("add_to_$accessor") ) {
+        if ( defined $new_result && $new_result->can("add_to_$accessor") ) {
             $source = $new_result->$accessor->result_source;
         }
     }
