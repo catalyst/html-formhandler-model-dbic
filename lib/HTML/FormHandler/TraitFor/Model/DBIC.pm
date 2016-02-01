@@ -147,7 +147,7 @@ It returns an array reference of key/value pairs for the column passed in.
 The column name defined in $field->label_column will be used as the label.
 The default label_column is "name". If label_column isn't supplied, and there
 isn't a column called "name", then if there the "" operator is overloaded by
-the ResultSet class, the result of stringifying the class is used as the label.
+the ResultClass, the result of stringifying the class is used as the label.
 The labels are sorted by Perl's cmp sort.
 
 If there is an "active" column then only active values are included, except
