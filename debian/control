@@ -1,0 +1,38 @@
+Source: libhtml-formhandler-model-dbic-perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Uploaders: Dominique Dumont <dod@debian.org>
+Section: perl
+Priority: optional
+Build-Depends: debhelper (>= 9)
+Build-Depends-Indep: libdatetime-format-mysql-perl,
+                     libdatetime-format-sqlite-perl,
+                     libdatetime-format-w3cdtf-perl,
+                     libdbd-sqlite3-perl,
+                     libdbix-class-perl (>= 0.08250),
+                     libdbix-class-resultset-recursiveupdate-perl,
+                     libhtml-formhandler-perl (>= 0.40016),
+                     libmoose-perl (>= 2.0007),
+                     libnamespace-autoclean-perl,
+                     libtest-exception-perl
+Standards-Version: 3.9.5
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libhtml-formhandler-model-dbic-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libhtml-formhandler-model-dbic-perl.git
+Homepage: https://metacpan.org/release/HTML-FormHandler-Model-DBIC
+
+Package: libhtml-formhandler-model-dbic-perl
+Architecture: all
+Depends: ${misc:Depends},
+         ${perl:Depends},
+         libdbix-class-perl (>= 0.08250),
+         libdbix-class-resultset-recursiveupdate-perl,
+         libhtml-formhandler-perl (>= 0.40016),
+         libmoose-perl (>= 2.0007),
+         libnamespace-autoclean-perl
+Provides: libhtml-formhandler-traitfor-model-dbic-perl
+Description: base class that holds DBIC model role
+ HTML::FormHandler::Model::DBIC and
+ HTML::FormHandler::TraitFor::Model::DBIC provide an interface between
+ HTML::FormHandler and DBIx::Class.
+ .
+ This interface is available as a regular class or as a Moose role.  It
+ will save form fields automatically to the database.

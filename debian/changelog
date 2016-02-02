@@ -1,0 +1,49 @@
+libhtml-formhandler-model-dbic-perl (0.29-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ gregor herrmann ]
+  * Strip trailing slash from metacpan URLs.
+
+  [ Salvatore Bonaccorso ]
+  * Update Vcs-Browser URL to cgit web frontend
+
+  [ gregor herrmann ]
+  * New upstream release.
+    Fixes "FTBFS: dh_auto_test: make -j1 test returned exit code 2"
+    (Closes: #759964)
+  * Refresh patches.
+  * Declare compliance with Debian Policy 3.9.5.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 30 Aug 2014 15:48:26 -0700
+
+libhtml-formhandler-model-dbic-perl (0.28-1) unstable; urgency=low
+
+  [ Salvatore Bonaccorso ]
+  * Change Vcs-Git to canonical URI (git://anonscm.debian.org)
+  * Change search.cpan.org based URIs to metacpan.org based URIs
+
+  [ Dominique Dumont ]
+  * Imported Upstream version 0.28
+  * bumped compat to 9
+  * control:
+    * added version dep on libdbix-class-perl
+    * bump std-version to 3.9.4
+    + build-dep in libtest-exception-perl
+  * copyright: updated years
+
+ -- Dominique Dumont <dod@debian.org>  Sun, 13 Oct 2013 18:35:48 +0200
+
+libhtml-formhandler-model-dbic-perl (0.23-1) unstable; urgency=low
+
+  * new upstream release
+  * control: bumped Depends libhtml-formhandler-perl to >= 0.40016
+    as done by upstream
+
+ -- Dominique Dumont <dod@debian.org>  Wed, 17 Oct 2012 13:41:10 +0200
+
+libhtml-formhandler-model-dbic-perl (0.21-1) unstable; urgency=low
+
+  * Initial Release. (Closes: #584899)
+
+ -- Dominique Dumont <dod@debian.org>  Sun, 02 Sep 2012 09:48:03 +0200
