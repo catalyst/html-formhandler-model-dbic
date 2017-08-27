@@ -1,4 +1,8 @@
-0.29.1
+0.30 - Andrew Ruthven
+   Changes to Dist::Zilla config
+   Merge in changes from Karen Etheridge
+
+0.29.1 - Andrew Ruthven
    Allow Select and Multiple to use the stringify operator for the labels
    Fix a bug where Multiple doesn't always find the labels
 
