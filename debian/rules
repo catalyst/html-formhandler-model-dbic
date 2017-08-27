@@ -8,6 +8,6 @@ TMP     = $(CURDIR)/debian/$(PACKAGE)
 	dh $@ --with dist-zilla
 
 override_dh_auto_install:
-	dh_auto_install
+	dh_auto_install -D .build/debian-build
 	mv $(TMP)/usr/bin/form_generator.pl $(TMP)/usr/bin/dbic_form_generator
 	mv $(TMP)/usr/share/man/man1/form_generator.pl.1p $(TMP)/usr/share/man/man1/dbic_form_generator.1p
