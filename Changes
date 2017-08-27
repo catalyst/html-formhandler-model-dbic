@@ -1,3 +1,7 @@
+0.29.1
+   Allow Select and Multiple to use the stringify operator for the labels
+   Fix a bug where Multiple doesn't always find the labels
+
 0.29
    Fix tests broken because item is now cleared
 
