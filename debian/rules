@@ -5,7 +5,7 @@ PACKAGE = $(shell dh_listpackages)
 TMP     = $(CURDIR)/debian/$(PACKAGE)
 
 %:
-	dh $@
+	dh $@ --with dist-zilla
 
 override_dh_auto_install:
 	dh_auto_install

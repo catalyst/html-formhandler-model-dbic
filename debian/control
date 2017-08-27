@@ -13,7 +13,14 @@ Build-Depends-Indep: libdatetime-format-mysql-perl,
                      libhtml-formhandler-perl (>= 0.40016),
                      libmoose-perl (>= 2.0007),
                      libnamespace-autoclean-perl,
-                     libtest-exception-perl
+                     libtest-exception-perl,
+                     dh-dist-zilla,
+                     libdist-zilla-plugin-git-perl,
+                     libdist-zilla-plugin-installguide-perl,
+                     libdist-zilla-plugin-podweaver-perl,
+                     libdist-zilla-plugin-test-notabs-perl,
+                     libdist-zilla-plugin-test-eol-perl,
+                     libdist-zilla-plugin-checkchangelog-perl
 Standards-Version: 3.9.5
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libhtml-formhandler-model-dbic-perl.git
 Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libhtml-formhandler-model-dbic-perl.git
