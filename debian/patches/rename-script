@@ -1,9 +1,20 @@
 Description: rename form_generator.pl script
- upstream script name is too generic. This patch reneams the file (and its manpage) at installation time. Doc refenence to this script are also modified
+ upstream script name is too generic. This patch renames the file (and its manpage) at installation time. Doc refenence to this script are also modified
 Author: dod
---- a/lib/HTML/FormHandler/Generator/DBIC.pm
-+++ b/lib/HTML/FormHandler/Generator/DBIC.pm
-@@ -111,7 +111,7 @@
+Index: html-formhandler-model-dbic/lib/HTML/FormHandler/Generator/DBIC.pm
+===================================================================
+--- html-formhandler-model-dbic.orig/lib/HTML/FormHandler/Generator/DBIC.pm
++++ html-formhandler-model-dbic/lib/HTML/FormHandler/Generator/DBIC.pm
+@@ -8,7 +8,7 @@ our $VERSION = '0.04';
+ 
+ =head1 SYNOPSIS
+ 
+-   form_generator.pl --rs_name=Book --schema_name=BookDB::Schema::DB
++   dbic_form_generator.pl --rs_name=Book --schema_name=BookDB::Schema::DB
+             --db_dsn=dbi:SQLite:t/db/book.db > BookForm.pm
+ 
+ =head1 DESCRIPTION
+@@ -137,7 +137,7 @@ has 'field_classes' => (
  my $form_template = <<'END';
  # Generated automatically with HTML::FormHandler::Generator::DBIC
  # Using following commandline:
@@ -12,18 +23,11 @@ Author: dod
  {
      package [% config.class %]Form;
      use HTML::FormHandler::Moose;
-@@ -374,7 +374,7 @@
- 
- =head1 SYNOPSIS
- 
--   form_generator.pl --rs_name=Book --schema_name=BookDB::Schema::DB
-+   dbci_form_generator --rs_name=Book --schema_name=BookDB::Schema::DB
-             --db_dsn=dbi:SQLite:t/db/book.db > BookForm.pm
- 
- =head1 DESCRIPTION
---- a/script/form_generator.pl
-+++ b/script/form_generator.pl
-@@ -19,7 +19,7 @@
+Index: html-formhandler-model-dbic/script/form_generator.pl
+===================================================================
+--- html-formhandler-model-dbic.orig/script/form_generator.pl
++++ html-formhandler-model-dbic/script/form_generator.pl
+@@ -19,7 +19,7 @@ __END__
  
  =head1 NAME
  
